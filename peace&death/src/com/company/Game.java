@@ -1,5 +1,5 @@
 package com.company;
-
+// JFX Library
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
+//Construct Game with JFX Application
 public class Game extends Application {
     private String codeString = "";
     private String undead = "OPS";
@@ -37,7 +37,7 @@ public class Game extends Application {
         instance = this;
         menu(stage);
     }
-
+    //function creating main menu
     private void menu(Stage stage){
         BorderPane bp = new BorderPane();
         Scene menuScene = new Scene(bp, 480, 480);
@@ -64,11 +64,11 @@ public class Game extends Application {
 
         startBtn.setOnAction(e -> { startgame(stage);});
         quitBtn.setOnAction(e -> Platform.exit());
-
+        //creating board of Game from Main menu
         stage.setTitle("Snake");
         stage.show();
     }
-
+    // function that start game
     public void startgame(Stage stage){
         stage.setResizable(false);
         currentLevel = 0;
@@ -80,7 +80,7 @@ public class Game extends Application {
 
         Food food = new Food(map);
         Snake snake = new Snake(map, food);
-
+        //Score counter
         Label scoreLabel = new Label("Score: " + Game.score);
         scoreLabel.relocate(20, 20);
         map.getChildren().add(scoreLabel);
@@ -88,7 +88,7 @@ public class Game extends Application {
         Label goalLabel = new Label("Goal: " + map.getGoal());
         goalLabel.relocate(map.getMapWidth() * Map.getUnit() - 60, 20);
         map.getChildren().add(goalLabel);
-
+        //Scenario of perssing keys
         scene.setOnKeyPressed(e -> {
             switch(e.getCode()) {
                 default:
@@ -123,7 +123,7 @@ public class Game extends Application {
             }
         };
         timer.start();
-
+        // creating scene with title executable application
         stage.setScene(scene);
         stage.setTitle("Snake");
         stage.show();
