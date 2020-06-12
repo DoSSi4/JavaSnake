@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 //Creating Snake on Pane( Panel in JFX)
-public class Snake extends Pane{
+public class Snake extends Pane implements Player{
     private Circle head;
     private boolean alive = true;
     private final int UNIT;
@@ -128,7 +128,7 @@ public class Snake extends Pane{
     }
 
     private
-    //constructiing body part with darkgreen circles
+            //constructing body part with darkgreen circles
     class Body extends Circle{
         private Position pos;
         Body(Position pos){
