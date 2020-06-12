@@ -1,26 +1,47 @@
 package com.company;
-// JFX LIbraries 
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
-//Creating Exectable App of our game
+
 public class Game extends Application {
-    // Two Speed values to declare the rate of updating picture on screen also for animation of snake;
-    private final long SPEED = 1_000_000_000;
-    private final long speed = 15;
-    private char ch = 'D'; //default move of snake head start to right
+
+    private long SPEED = 1_000_000_000;
+    private final long speed = 10;
+    private char ch = 'D';
+
+    private Map map;
+    private int currentLevel = 0;
+
+    private static int score = 0;
+    private static Game instance;
+
+    public static Game getInstance() {return instance;}
+
 
     @Override
     public void start(Stage stage){
-        Map map = new Map("level1");
-        Scene scene = new Scene(map, map.getMapWidth() * Map.getUnit(), map.getMapHeight() * Map.getUnit()); 
-        //creating board with inserted boarders in level1.map
+        stage.setResizable(false);
+        currentLevel = 0;
+        instance = this;
+        Game.score = 0;
 
-        Food food = new Food(map); //adding food on plane 
-        Snake snake = new Snake(map, food); // adding snakehead on plane
+        map = new Map("level" + currentLevel);
+        Scene scene = new Scene(map, map.getMapWidth() * Map.getUnit(), map.getMapHeight() * Map.getUnit());
 
-        // Scenario of pressing different keys
+        Food food = new Food(map);
+        Snake snake = new Snake(map, food);
+
+        Label scoreLabel = new Label("Score: " + Game.score);
+        scoreLabel.relocate(20, 20);
+        map.getChildren().add(scoreLabel);
+
+        Label goalLabel = new Label("Goal: " + map.getGoal());
+        goalLabel.relocate(map.getMapWidth() * Map.getUnit() - 60, 20);
+        map.getChildren().add(goalLabel);
+
         scene.setOnKeyPressed(e -> {
             switch(e.getCode()) {
                 default:
@@ -34,7 +55,9 @@ public class Game extends Application {
                 case UP: ch = 'W'; break;
             }
         });
-        //Live Update the snake movements
+
+        scoreLabel.setText("Score: " + Game.score);
+
         AnimationTimer timer = new AnimationTimer() {
             long lastUpdate = 0;
             @Override
@@ -53,7 +76,7 @@ public class Game extends Application {
             }
         };
         timer.start();
-        //Creating app with title Snake
+
         stage.setScene(scene);
         stage.setTitle("Snake");
         stage.show();
