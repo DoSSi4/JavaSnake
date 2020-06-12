@@ -1,25 +1,26 @@
 package com.company;
-
+// JFX LIbraries 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+//Creating Exectable App of our game
 public class Game extends Application {
-
+    // Two Speed values to declare the rate of updating picture on screen also for animation of snake;
     private final long SPEED = 1_000_000_000;
     private final long speed = 15;
-    private char ch = 'D';
+    private char ch = 'D'; //default move of snake head start to right
 
     @Override
     public void start(Stage stage){
         Map map = new Map("level1");
-        Scene scene = new Scene(map, map.getMapWidth() * Map.getUnit(), map.getMapHeight() * Map.getUnit());
+        Scene scene = new Scene(map, map.getMapWidth() * Map.getUnit(), map.getMapHeight() * Map.getUnit()); 
+        //creating board with inserted boarders in level1.map
 
-        Food food = new Food(map);
-        Snake snake = new Snake(map, food);
+        Food food = new Food(map); //adding food on plane 
+        Snake snake = new Snake(map, food); // adding snakehead on plane
 
-
+        // Scenario of pressing different keys
         scene.setOnKeyPressed(e -> {
             switch(e.getCode()) {
                 default:
@@ -33,7 +34,7 @@ public class Game extends Application {
                 case UP: ch = 'W'; break;
             }
         });
-
+        //Live Update the snake movements
         AnimationTimer timer = new AnimationTimer() {
             long lastUpdate = 0;
             @Override
@@ -52,7 +53,7 @@ public class Game extends Application {
             }
         };
         timer.start();
-
+        //Creating app with title Snake
         stage.setScene(scene);
         stage.setTitle("Snake");
         stage.show();
