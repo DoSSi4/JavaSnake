@@ -1,5 +1,5 @@
 package com.company;
-
+//Position class just X and Y axis with setters and getters
 public class Position {
     private int x;
     private int y;
