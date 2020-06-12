@@ -1,18 +1,17 @@
 package com.company;
-
+// Import libraries
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-
+//Creating Map in JFX Panel
 public class Map extends Pane {
-    private static final int UNIT = 20;
+    private static final int UNIT = 20; //One cell in 20 px;
     private int width;
     private int height;
     private static int goal = 0;
-    private static int[][] map;
+    private static int[][] map; //2D array with Map
 
     private Position startPos;
 
@@ -29,7 +28,6 @@ public class Map extends Pane {
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
                 map[i][j] = scan.nextInt();
-                //System.out.print(map[i][j] + " ");
                 if(map[i][j] == 2) {
                     startPos = new Position(j, i);
                 }
@@ -41,12 +39,10 @@ public class Map extends Pane {
                     map[i][j] = 1;
                 }
             }
-            //System.out.println();
         }
-
         scan.close();
     }
-
+//Setters and Getters to use in other classes
     public int getMapWidth(){
         return width;
     }
