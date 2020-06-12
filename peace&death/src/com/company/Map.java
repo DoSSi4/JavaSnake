@@ -6,14 +6,16 @@ import java.util.Scanner;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-//Creating Map on JFX Panel
+
 public class Map extends Pane {
-    private static final int UNIT = 20; // declare 1 Unit on Map as 20 px;
-    private int width; 
+    private static final int UNIT = 20;
+    private int width;
     private int height;
-    private static int[][] map; //2D-array to create map
+    private static int goal = 0;
+    private static int[][] map;
+
     private Position startPos;
-    //Constructing Map with choosing level
+
     public Map(String level) {
         Scanner scan = new Scanner(System.in);
         try {
@@ -21,27 +23,30 @@ public class Map extends Pane {
         }catch(FileNotFoundException fnf) {}
         width = scan.nextInt();
         height = scan.nextInt();
+        goal = scan.nextInt();
         map = new int[height][width];
 
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
                 map[i][j] = scan.nextInt();
-                if(map[i][j] == 2) { // 2 in map means startPos of Head
+                //System.out.print(map[i][j] + " ");
+                if(map[i][j] == 2) {
                     startPos = new Position(j, i);
                 }
-                if(map[i][j] == 1) { // 1 in map means black border
+                if(map[i][j] == 1) {
                     Rectangle rec = new Rectangle(j*UNIT, i*UNIT, UNIT, UNIT);
                     getChildren().add(rec);
                 }
-                if(map[i][j] == 3) { // 3 just avoiding 
+                if(map[i][j] == 3) {
                     map[i][j] = 1;
                 }
             }
+            //System.out.println();
         }
 
         scan.close();
     }
-    //Getters for map
+
     public int getMapWidth(){
         return width;
     }
@@ -55,10 +60,19 @@ public class Map extends Pane {
         return startPos;
     }
 
-    //Check method for creating snake
+    public static boolean isPassed(int score) {
+        if(score >= goal)
+            return true;
+        return false;
+    }
+    public int getGoal() {
+        return goal;
+    }
+
     public static boolean validate(int x, int y) {
-        if(map[y][x] != 1) {return true;}
-        else {return false;}
+        if(map[y][x] != 1)
+            return true;
+        return false;
     }
 
 }

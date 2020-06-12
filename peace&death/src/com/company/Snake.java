@@ -67,9 +67,9 @@ public class Snake extends Pane implements Player{
             lastPos = new Position(headPos.getX(), headPos.getY());
             int newX = headPos.getX() + direction.getX();
             int newY = headPos.getY() + direction.getY();
-            if(newX < 0)	newX = map.getMapWidth() - 1;
+            if(newX < 0)  newX = map.getMapWidth() - 1;
             if(newX >= map.getMapWidth()) newX = 0;
-            if(newY < 0)	newY = map.getMapHeight() - 1;
+            if(newY < 0)  newY = map.getMapHeight() - 1;
             if(newY >= map.getMapHeight()) newY = 0;
             headPos.setX(newX);
             headPos.setY(newY);
@@ -88,8 +88,6 @@ public class Snake extends Pane implements Player{
             checkColision();
         }
     }
-
-
     //Different types of checking collision
     private void checkColision() {
         if (!Map.validate(headPos.getX(), headPos.getY())) {
@@ -99,6 +97,7 @@ public class Snake extends Pane implements Player{
             food = new Food(map);
             map.getChildren().add(food);
             addBodyPart();
+            Game.addScore(1);
         }
         for (Body body : bodyParts) {
             if (body.getPos().getX() == headPos.getX() && body.getPos().getY() == headPos.getY()) {
@@ -113,7 +112,7 @@ public class Snake extends Pane implements Player{
                                 "user=root&password="
                 );
                 Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("INSERT INTO `scoretable` (`nickname`, `score`) VALUES ('', '');");
+                ResultSet rs = stmt.executeQuery("INSERT INTO scoretable (nickname, score) VALUES ('', '');");
 
             } catch (Exception e) {
                 System.out.println(e);
