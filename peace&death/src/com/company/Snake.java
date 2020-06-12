@@ -1,5 +1,5 @@
 package com.company;
-
+//Importing SQL and FX Library
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.util.List;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
+//Creating Snake on Pane( Panel in JFX)
 public class Snake extends Pane{
     private Circle head;
     private boolean alive = true;
@@ -18,12 +18,12 @@ public class Snake extends Pane{
     private Position headPos;
     private Position direction;
     private Position lastPos;
-
+    // Body part looks like array of circles
     private List<Body> bodyParts;
     private Food food;
     private Map map;
 
-
+    //Construct the snake with map and food
     public Snake(Map map, Food food) {
         this(map.getStartPosition());
         this.map = map;
@@ -31,7 +31,7 @@ public class Snake extends Pane{
         map.getChildren().add(this);
         map.getChildren().add(food);
     }
-
+    // Snake spawn in start position
     public Snake(Position start) {
         headPos = start;
         UNIT = Map.getUnit();
@@ -40,6 +40,7 @@ public class Snake extends Pane{
         getChildren().add(head);
         bodyParts = new ArrayList<Body>();
     }
+    //Movements methods
     public void moveRight() {
         if(direction.getX()!= -1) {
             direction = new Position(1, 0);
@@ -60,6 +61,7 @@ public class Snake extends Pane{
             direction = new Position(0, -1);
         }
     }
+    //Method of updating position in live
     public void update() {
         if(alive) {
             lastPos = new Position(headPos.getX(), headPos.getY());
@@ -88,7 +90,7 @@ public class Snake extends Pane{
     }
 
 
-
+    //Different types of checking collision
     private void checkColision() {
         if (!Map.validate(headPos.getX(), headPos.getY())) {
             alive = false;
@@ -118,7 +120,7 @@ public class Snake extends Pane{
             }
         }
     }
-
+    //function to addBodPart in <List>
     private void addBodyPart() {
         Body body = new Body(lastPos);
         bodyParts.add(body);
@@ -126,7 +128,7 @@ public class Snake extends Pane{
     }
 
     private
-
+    //constructiing body part with darkgreen circles
     class Body extends Circle{
         private Position pos;
         Body(Position pos){
