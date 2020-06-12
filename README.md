@@ -3,7 +3,8 @@ End-term project (OOP subject)
 
 
 Hello, user!
-Here is the JavaFX based Snake Game ![screenshot of game](https://ibb.co/7zHbFZ2)
+Here is the JavaFX based Snake Game 
+![screenshot of game](https://i.ibb.co/LPMvfcn/image.png)
 ---------------------------------------------------------------------------------
 In out game source code we use:
 1. JavaFX and JFXLibrary (graphics)
