@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-//Construct Game with JFX Application
+//Construction Game with JFX Application
 public class Game extends Application {
     private String codeString = "";
     private String undead = "OPS";
